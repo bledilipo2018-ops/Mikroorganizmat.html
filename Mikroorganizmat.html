@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratori i mikroorganizmave – Fletë pune interaktive</title>
+<style>
+:root{--ink:#19324a;--muted:#607487;--bg:#f3f7fa;--paper:#fff;--line:#dce6ed;--blue:#176b87;--teal:#168477;--gold:#f0b84b;--soft:#eaf4f7;--good:#e7f5ed;--bad:#fff0ed}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(120deg,#123d59,#176b87);color:white;padding:30px 18px 26px}
+.wrap{max-width:980px;margin:auto;padding:0 16px}
+.kicker{text-transform:uppercase;letter-spacing:.12em;font-size:.76rem;font-weight:800;opacity:.82}
+h1{font-size:clamp(1.65rem,4vw,2.5rem);line-height:1.12;margin:8px 0}
+header p{max-width:720px;margin:10px 0 0;color:#e5f2f6}
+.meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.meta label{font-size:.82rem;color:#e5f2f6}.meta input{display:block;width:100%;margin-top:4px;padding:9px;border:1px solid #8bb6c5;border-radius:8px;background:#fff;color:#18344a}
+main{padding:22px 0 50px}.intro{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px}
+.intro strong{color:var(--blue)}.progressbox{display:flex;align-items:center;gap:12px;margin-top:12px}
+progress{width:100%;height:10px;accent-color:var(--teal)}.progressbox span{white-space:nowrap;font-size:.85rem;color:var(--muted)}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:20px;margin:16px 0;box-shadow:0 3px 12px #173b5510}
+.sectionhead{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.num{background:var(--soft);color:var(--blue);font-weight:900;border-radius:10px;padding:7px 11px}
+h2{font-size:1.22rem;margin:0 0 3px}.level{font-size:.78rem;font-weight:800;color:var(--teal);text-transform:uppercase;letter-spacing:.06em}
+.instruction{color:var(--muted);margin:4px 0 14px}
+.q{padding:13px 0;border-top:1px solid var(--line)}.q:first-of-type{border-top:0}
+.q p{margin:0 0 9px;font-weight:650}
+.options{display:grid;gap:7px}.options label{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border:1px solid var(--line);border-radius:9px;cursor:pointer}
+.options label:hover{background:#f7fbfc}.options input{margin-top:5px;accent-color:var(--blue)}
+textarea,input[type=text],select{font:inherit}textarea{width:100%;min-height:82px;border:1px solid #c8d7e1;border-radius:9px;padding:10px;resize:vertical;background:#fcfeff}
+select{width:100%;padding:9px;border:1px solid #c8d7e1;border-radius:9px;background:white}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;margin:9px 0}
+.matchrow .term{font-weight:650;background:#f5f9fb;padding:9px;border-radius:8px}
+button{border:0;border-radius:9px;padding:10px 15px;font-weight:750;cursor:pointer}
+.primary{background:var(--blue);color:#fff}.secondary{background:#e8f0f4;color:var(--ink)}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.feedback{display:none;padding:10px 12px;border-radius:9px;margin-top:10px;font-weight:650}.feedback.show{display:block}.good{background:var(--good);color:#17613d}.bad{background:var(--bad);color:#963d2e}
+.small{font-size:.88rem;color:var(--muted)}.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}.compare>div{background:#f7fafc;padding:12px;border-radius:10px}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:12px}
+@media(max-width:620px){.meta{grid-template-columns:1fr}.compare,.matchgrid{grid-template-columns:1fr}.matchrow{grid-template-columns:1fr}.section{padding:16px}}
+@media print{body{background:white}.section,.intro{box-shadow:none;break-inside:avoid}button,.progressbox{display:none}textarea{min-height:60px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="kicker">Biologji • Fletë pune interaktive • Ora II</div>
+<h1>Laboratori i mikroorganizmave</h1>
+<p>Nga njohja te analiza, sinteza dhe gjykimi kritik. Vëzhgo, krahaso, lidh provat dhe mbro mendimin tënd me arsye.</p>
+<div class="meta">
+<label>Emri dhe mbiemri<input id="student" type="text" placeholder="Shkruaj emrin"></label>
+<label>Klasa<input id="class" type="text" placeholder="p.sh. VII-B"></label>
+<label>Data<input id="date" type="text" placeholder="dd/mm/vvvv"></label>
+</div>
+</div></header>
+<main class="wrap">
+<div class="intro">
+<strong>Si do të punosh?</strong> Plotësoji detyrat sipas radhës. Fillimisht rikujto njohuritë, pastaj përdori ato për të shpjeguar dhe zgjidhur situata. Për pyetjet me shkrim nuk ka vetëm një formulim të saktë: rëndësi ka argumentimi dhe përdorimi i fakteve biologjike.
+<div class="progressbox"><progress id="progress" value="0" max="8"></progress><span id="progressText">0/8 detyra të prekura</span></div>
+</div>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">01</span><div><div class="level">N2 • Njohje dhe kuptim</div><h2>Kontrollo bazat</h2></div></div>
+<p class="instruction">Zgjidh alternativën më të përshtatshme për secilën pyetje.</p>
+<div class="q"><p>1. Cili grup përfshin organizma që mund të kryejnë fotosintezë?</p><div class="options">
+<label><input type="radio" name="q1" value="a"> Bakteret pa përjashtim</label>
+<label><input type="radio" name="q1" value="b"> Algat</label>
+<label><input type="radio" name="q1" value="c"> Protozoarët</label></div></div>
+<div class="q"><p>2. Cila fjali për kërpudhat është e saktë?</p><div class="options">
+<label><input type="radio" name="q2" value="a"> Të gjitha prodhojnë vetë ushqimin me fotosintezë.</label>
+<label><input type="radio" name="q2" value="b"> Ushqehen duke përthithur lëndë organike nga mjedisi.</label>
+<label><input type="radio" name="q2" value="c"> Jetojnë vetëm në ujë.</label></div></div>
+<div class="q"><p>3. Protozoarët zakonisht janë organizma:</p><div class="options">
+<label><input type="radio" name="q3" value="a"> Njëqelizorë dhe heterotrofë</label>
+<label><input type="radio" name="q3" value="b"> Shumëqelizorë dhe fotosintetikë</label>
+<label><input type="radio" name="q3" value="c"> Që nuk kanë nevojë për ujë ose lagështi</label></div></div>
+<button class="primary" onclick="checkBasics()">Kontrollo përgjigjet</button><div id="basicFeedback" class="feedback"></div>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">02</span><div><div class="level">N2 → N3 • Krahasim</div><h2>Gjej të përbashkëtat dhe dallimet</h2></div></div>
+<p class="instruction">Plotëso tabelën me fjalët e tua. Shkruaj të paktën një të përbashkët dhe dy dallime.</p>
+<div class="compare">
+<div><strong>Bakteret dhe protozoarët</strong><textarea id="compare1" placeholder="Të përbashkëtat dhe dallimet..."></textarea></div>
+<div><strong>Algat dhe kërpudhat</strong><textarea id="compare2" placeholder="Të përbashkëtat dhe dallimet..."></textarea></div>
+</div>
+<p class="small">Mund të mendosh për ndërtimin, mënyrën e ushqyerjes dhe mjedisin ku jetojnë.</p>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">03</span><div><div class="level">N3 • Zbatim dhe klasifikim</div><h2>Lidh me shigjetë</h2></div></div>
+<p class="instruction">Për secilin përshkrim, zgjidh grupin që i përshtatet më mirë. Çdo grup mund të përdoret më shumë se një herë.</p>
+<div id="matching">
+<div class="matchrow"><div class="term">1. Organizma që mund të gjenden në pellgje dhe të prodhojnë lëndë ushqyese me fotosintezë.</div><select data-answer="alga"><option value="">Zgjidh grupin…</option><option value="baktere">Baktere</option><option value="alga">Alga</option><option value="proto">Protozoarë</option><option value="kerpudha">Kërpudha</option></select></div>
+<div class="matchrow"><div class="term">2. Organizma njëqelizorë që mund të lëvizin me qerpikë ose kamxhik.</div><select data-answer="proto"><option value="">Zgjidh grupin…</option><option value="baktere">Baktere</option><option value="alga">Alga</option><option value="proto">Protozoarë</option><option value="kerpudha">Kërpudha</option></select></div>
+<div class="matchrow"><div class="term">3. Organizma që mund të shpërbëjnë mbetje organike dhe të përthithin lëndë ushqyese.</div><select data-answer="kerpudha"><option value="">Zgjidh grupin…</option><option value="baktere">Baktere</option><option value="alga">Alga</option><option value="proto">Protozoarë</option><option value="kerpudha">Kërpudha</option></select></div>
+<div class="matchrow"><div class="term">4. Organizma shumë të vegjël, prokariote, që gjenden në tokë, ujë dhe në organizma të tjerë.</div><select data-answer="baktere"><option value="">Zgjidh grupin…</option><option value="baktere">Baktere</option><option value="alga">Alga</option><option value="proto">Protozoarë</option><option value="kerpudha">Kërpudha</option></select></div>
+</div>
+<button class="primary" onclick="checkMatching()">Kontrollo lidhjet</button><div id="matchFeedback" class="feedback"></div>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">04</span><div><div class="level">N3 • Analizë</div><h2>Lexo të dhënat dhe nxirr përfundim</h2></div></div>
+<p>Një nxënës mori tri mostra nga mjedise të ndryshme dhe i vëzhgoi me mikroskop.</p>
+<table style="width:100%;border-collapse:collapse;margin:10px 0">
+<tr style="background:#eaf4f7"><th style="text-align:left;padding:9px;border:1px solid #dce6ed">Mostra</th><th style="text-align:left;padding:9px;border:1px solid #dce6ed">Vëzhgimi</th></tr>
+<tr><td style="padding:9px;border:1px solid #dce6ed">A – ujë pellgu</td><td style="padding:9px;border:1px solid #dce6ed">Qeliza të gjelbra që përdorin dritën.</td></tr>
+<tr><td style="padding:9px;border:1px solid #dce6ed">B – ujë i ndenjur</td><td style="padding:9px;border:1px solid #dce6ed">Qeliza që lëvizin dhe ushqehen me grimca organike.</td></tr>
+<tr><td style="padding:9px;border:1px solid #dce6ed">C – bukë e lënë disa ditë</td><td style="padding:9px;border:1px solid #dce6ed">Fije të holla dhe struktura që formojnë spore.</td></tr>
+</table>
+<div class="q"><p>a) Cilit grup mikroorganizmash mund t'i përkasë secila mostër? Shpjego duke përdorur të dhënat.</p><textarea id="analysis1" placeholder="A..., sepse... B..., sepse... C..., sepse..."></textarea></div>
+<div class="q"><p>b) Pse nuk mjafton vetëm vendi ku u mor mostra për të përcaktuar grupin e organizmit?</p><textarea id="analysis2" placeholder="Arsyeto..."></textarea></div>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">05</span><div><div class="level">N4 • Sintezë</div><h2>Ndërto një shpjegim të plotë</h2></div></div>
+<p class="instruction">Imagjino se duhet t'i shpjegosh një nxënësi më të vogël pse mikroorganizmat nuk janë të gjithë njësoj. Shkruaj një paragraf 5–7 fjali ku të përfshish të katër grupet.</p>
+<textarea id="synthesis" style="min-height:135px" placeholder="Mikroorganizmat përfshijnë... Një dallim i rëndësishëm është..."></textarea>
+<p class="small">Përfshi të paktën: ndërtimin/qelizën, mënyrën e ushqyerjes, një mjedis ku jetojnë dhe një dallim mes grupeve.</p>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">06</span><div><div class="level">N4 • Gjykim dhe argumentim</div><h2>Jep gjykimin tënd</h2></div></div>
+<p><strong>Një nxënës thotë:</strong> “Të gjithë mikroorganizmat janë të dëmshëm dhe duhen zhdukur.”</p>
+<div class="q"><p>A je dakord, pjesërisht dakord apo nuk je dakord? Jep një gjykim dhe mbështete me të paktën dy argumente ose shembuj.</p><textarea id="judgement" placeholder="Gjykimi im është... Argumenti i parë... Argumenti i dytë..."></textarea></div>
+<p class="small">Mendo edhe për rolin e disa mikroorganizmave në shpërbërjen e mbetjeve, prodhimin e ushqimeve ose ekosisteme.</p>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">07</span><div><div class="level">N4 • Situatë problemore dhe mendim kritik</div><h2>Çfarë do të bëje në këtë situatë?</h2></div></div>
+<p>Në laboratorin e shkollës, një grup nxënësish vëren se buka e lënë në një qese të lagësht ka zhvilluar myk. Njëri propozon ta nuhasin nga afër dhe ta prekin për të kuptuar më mirë si është.</p>
+<div class="q"><p>a) A është veprimi i propozuar i sigurt? Pse?</p><textarea id="critical1" placeholder="Vlerëso rrezikun..."></textarea></div>
+<div class="q"><p>b) Propozo një mënyrë më të sigurt për ta studiuar mykun, pa e prekur dhe pa e nuhatur nga afër.</p><textarea id="critical2" placeholder="Do të propozoja..."></textarea></div>
+<div class="q"><p>c) Çfarë përfundimi mund të nxjerrësh për kushtet që favorizojnë rritjen e mykut? Çfarë prove tjetër do të kërkoje para se të nxirrje një përfundim të sigurt?</p><textarea id="critical3" placeholder="Përfundimi im... Prova tjetër..."></textarea></div>
+</section>
+
+<section class="section" data-task>
+<div class="sectionhead"><span class="num">08</span><div><div class="level">Metak njohje • Reflektim</div><h2>Si mendova dhe çfarë kuptova?</h2></div></div>
+<div class="q"><p>1. Cila detyrë të kërkoi më shumë arsyetim? Pse?</p><textarea id="reflect1" placeholder="Detyra... sepse..."></textarea></div>
+<div class="q"><p>2. Cila ide për mikroorganizmat është bërë më e qartë për ty?</p><textarea id="reflect2" placeholder="Tani kuptoj se..."></textarea></div>
+<div class="q"><p>3. Çfarë pyetjeje do të doje të hetoje më tej?</p><textarea id="reflect3" placeholder="Do të doja të zbuloja..."></textarea></div>
+</section>
+
+<div class="section">
+<h2>Kontrollo punën tënde</h2>
+<p class="instruction">Para se ta dorëzosh, kontrollo nëse ke mbështetur përgjigjet me fakte dhe shembuj.</p>
+<div class="q"><label><input type="checkbox" class="done"> Kam plotësuar të gjitha detyrat.</label></div>
+<div class="q"><label><input type="checkbox" class="done"> Kam shpjeguar arsyetimin, jo vetëm kam dhënë përgjigjen.</label></div>
+<div class="q"><label><input type="checkbox" class="done"> Kam përdorur fjalë shkencore në mënyrë të saktë.</label></div>
+<div class="actions">
+<button class="primary" onclick="downloadAnswers()">Ruaj përgjigjet (.txt)</button>
+<button class="secondary" onclick="window.print()">Printo fletën</button>
+<button class="secondary" onclick="resetAll()">Pastro dhe rifillo</button>
+</div>
+<p class="small">Shënim: përgjigjet e hapura vlerësohen nga mësuesi sipas saktësisë shkencore, argumentimit dhe përdorimit të provave. Fleta nuk dërgon të dhëna në internet.</p>
+</div>
+<footer>Biologji • Mikroorganizmat • Mëso duke hetuar</footer>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+function updateProgress(){
+ const sections=[...document.querySelectorAll('section[data-task]')];
+ let count=0;
+ sections.forEach(sec=>{
+   const controls=[...sec.querySelectorAll('input,textarea,select')];
+   if(controls.some(c=>c.type==='radio'?c.checked:(c.value||'').trim()!=='')) count++;
+ });
+ $('#progress').value=count;$('#progressText').textContent=count+'/8 detyra të prekura';
+}
+document.addEventListener('input',updateProgress);document.addEventListener('change',updateProgress);
+function feedback(id,msg,good){const el=document.getElementById(id);el.textContent=msg;el.className='feedback show '+(good?'good':'bad');}
+function checkBasics(){
+ const key={q1:'b',q2:'b',q3:'a'};let score=0,answered=0;
+ Object.keys(key).forEach(k=>{let v=document.querySelector('input[name="'+k+'"]:checked');if(v){answered++;if(v.value===key[k])score++;}});
+ if(answered<3){feedback('basicFeedback','Ke plotësuar '+answered+' nga 3 pyetjet. Plotësoji të gjitha për të parë rezultatin.',false);return;}
+ feedback('basicFeedback','Rezultati: '+score+'/3. '+(score===3?'Shkëlqyeshëm!': 'Rishiko përgjigjet dhe arsyeto pse alternativa e saktë është e tillë.'),score===3);
+}
+function checkMatching(){
+ const selects=[...document.querySelectorAll('#matching select')];let score=0,answered=0;
+ selects.forEach(s=>{if(s.value)answered++;if(s.value===s.dataset.answer)score++;});
+ if(answered<4){feedback('matchFeedback','Ke plotësuar '+answered+' nga 4 lidhjet. Plotësoji të gjitha.',false);return;}
+ feedback('matchFeedback','Lidhjet e sakta: '+score+'/4. '+(score===4?'Të gjitha lidhjet janë të sakta!':'Rilexo tiparet në secilin përshkrim dhe provo përsëri.'),score===4);
+}
+function downloadAnswers(){
+ const fields=[['Emri',$('#student').value],['Klasa',$('#class').value],['Data',$('#date').value]];
+ document.querySelectorAll('textarea').forEach(t=>fields.push([t.id,t.value]));
+ document.querySelectorAll('input[type=radio]:checked').forEach(r=>fields.push([r.name,r.value]));
+ document.querySelectorAll('#matching select').forEach((s,i)=>fields.push(['Lidhja '+(i+1),s.options[s.selectedIndex].text]));
+ const content='FLETË PUNE – LABORATORI I MIKROORGANIZMAVE\n\n'+fields.map(x=>x[0]+':\n'+x[1]).join('\n\n');
+ const blob=new Blob([content],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Pergjigjet_mikroorganizmat.txt';a.click();URL.revokeObjectURL(a.href);
+}
+function resetAll(){if(confirm('Je i/e sigurt që dëshiron të fshish të gjitha përgjigjet?')){document.querySelectorAll('input,textarea,select').forEach(e=>{if(e.type==='checkbox'||e.type==='radio')e.checked=false;else e.value='';});document.querySelectorAll('.feedback').forEach(e=>{e.className='feedback';e.textContent='';});updateProgress();}}
+updateProgress();
+</script>
+</body>
+</html>
